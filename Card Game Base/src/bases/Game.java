@@ -12,28 +12,47 @@ public class Game {
 	public ArrayList<Card> player1Side = new ArrayList<Card>();
 	public ArrayList<Card> player2Side = new ArrayList<Card>();
 	
+	public GameManager player1GameManager;
+	public GameManager player2GameManager;
+	
 	public ArrayList<int[]> eventLog = new ArrayList<int[]>();
 	
 	//Utility methods called during game running
 	public boolean affectEnergyTotal(int cost) {
 
 		boolean returnVal;
-		if(cost < energyTotal) {
+		if(cost <= energyTotal) {
 			energyTotal -= cost;
 			returnVal = true;
 		}else {
 			returnVal = false;
 		}
 		
+		System.out.println(energyTotal);
+		
 		return returnVal;
 	}
 
 	public void addCardToField(Card card, Player player) {
+		int[] codes = {CONSTANTS.NULL_EVENT};
+		if(card instanceof Monster) {
+			int[] val = {CONSTANTS.CARD_PLAYED, CONSTANTS.MONSTER_PLAYED};
+			codes = val;
+		}
+		else if(card instanceof Cast) {
+			int[] val = {CONSTANTS.CARD_PLAYED, CONSTANTS.CAST_PLAYED};
+			codes = val;
+		}
+		
+		addEventToQueue(codes);
+		
 		if(player == player1) {
 			player1Side.add(card);
+			affectEnergyTotal(card.getEnergyCost());
 		}
 		else if(player == player2) {
 			player2Side.add(card);
+			affectEnergyTotal(card.getEnergyCost());
 		}
 	}
 
@@ -60,6 +79,13 @@ public class Game {
 				if(intInArray(i, c.getRespondCodes())) {
 					player1Options.add(c);
 				}
+			}
+		}
+		
+		if(player1Options.size() > 0) {
+			Card c = player1GameManager.selectCard(player1Options, this);
+			if(c.activatedEffectValid(this, player1, player1Side)) {
+				c.activatedEffect(this, player1, player1Side);
 			}
 		}
 	}

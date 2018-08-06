@@ -34,12 +34,8 @@ public class Player {
 	}
 	
 	public void playCard(Card card, Game game) {
-		boolean success = game.affectEnergyTotal(card.getEnergyCost());
-		if(success){
-			game.addCardToField(card, this);
-			hand.remove(card);
-		}
+		hand.remove(card);
+		game.addCardToField(card, this);
 	}
 	
-
 }

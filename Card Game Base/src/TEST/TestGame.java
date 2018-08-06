@@ -28,58 +28,11 @@ public class TestGame {
 		game.player1 = player1;
 		game.player2 = player2;
 		
+		game.player1GameManager = new TestGameManager(player1);
+		
 		game.startGame();
 		
-		boolean wantQuit = false;
-		
-		System.out.println("Waiting for input");
-		while(! wantQuit) {	
-			Scanner scan = new Scanner(System.in);
-			String s = "";
-			if(scan.hasNextLine()) {
-				s = scan.nextLine();
-			if(s.equals("play")) {
-				System.out.println("Enter index of desired card");
-				int index = scan.nextInt();
-				if(index < player1.hand.size()) {
-					player1.playCard(player1.hand.get(index), game);
-				}else {
-					System.out.println("Invalid index!");
-				}
-			}
-			else if(s.equals("show")) {
-				for(Card c:player1.hand) {
-					System.out.println(c.name);
-				}
-			}
-			else if(s.equals("energy")) {
-				System.out.println(game.energyTotal);
-			}
-			else if(s.equals("health")) {
-				System.out.println(player1.getlifeTotal());
-			}
-			else if(s.equals("quit")) {
-				wantQuit = true;
-				scan.close();
-			}
-			else if(s.equals("p1side")) {
-				for(Card c:game.player1Side) {
-					System.out.println(c.name);
-				}
-			}
-			else if(s.equals("p2side")) {
-				for(Card c: game.player2Side){
-					System.out.println(c.name);
-				}
-			}
-			else {
-				System.out.println("Invalid input!");
-			}
-			System.out.println("Waiting for input");
-			
-			}
-				
-		}
+		game.player1GameManager.turnSelection(game);
 	}
 
 }
