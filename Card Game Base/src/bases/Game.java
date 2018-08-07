@@ -27,33 +27,50 @@ public class Game {
 		}else {
 			returnVal = false;
 		}
-		
-		System.out.println(energyTotal);
-		
 		return returnVal;
 	}
 
-	public void addCardToField(Card card, Player player) {
-		int[] codes = {CONSTANTS.NULL_EVENT};
-		if(card instanceof Monster) {
-			int[] val = {CONSTANTS.CARD_PLAYED, CONSTANTS.MONSTER_PLAYED};
-			codes = val;
-		}
-		else if(card instanceof Cast) {
-			int[] val = {CONSTANTS.CARD_PLAYED, CONSTANTS.CAST_PLAYED};
-			codes = val;
-		}
-		
-		addEventToQueue(codes);
-		
+	public boolean addCardToField(Card card, Player player) {
+		boolean returnVal = false;
 		if(player == player1) {
-			player1Side.add(card);
-			affectEnergyTotal(card.getEnergyCost());
+			boolean b = affectEnergyTotal(card.getEnergyCost());
+			if(b) {
+				player1Side.add(card);
+				player1.hand.remove(card);
+				int[] codes = {CONSTANTS.NULL_EVENT};
+				if(card instanceof Monster) {
+					int[] val = {CONSTANTS.CARD_PLAYED, CONSTANTS.MONSTER_PLAYED};
+					codes = val;
+				}
+				else if(card instanceof Cast) {
+					int[] val = {CONSTANTS.CARD_PLAYED, CONSTANTS.CAST_PLAYED};
+					codes = val;
+				}
+				
+				addEventToQueue(codes);
+				returnVal = true;
+			}
 		}
 		else if(player == player2) {
-			player2Side.add(card);
-			affectEnergyTotal(card.getEnergyCost());
+			boolean b = affectEnergyTotal(card.getEnergyCost());
+			if(b) {
+				player2Side.add(card);
+				int[] codes = {CONSTANTS.NULL_EVENT};
+				if(card instanceof Monster) {
+					int[] val = {CONSTANTS.CARD_PLAYED, CONSTANTS.MONSTER_PLAYED};
+					codes = val;
+				}
+				else if(card instanceof Cast) {
+					int[] val = {CONSTANTS.CARD_PLAYED, CONSTANTS.CAST_PLAYED};
+					codes = val;
+				}
+				
+				addEventToQueue(codes);
+				returnVal = true;
+			}
 		}
+		
+		return returnVal;
 	}
 
 	public Player getOppositePlayer(Player player) {

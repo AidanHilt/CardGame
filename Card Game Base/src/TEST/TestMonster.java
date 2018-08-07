@@ -16,8 +16,6 @@ public class TestMonster extends Monster {
 	
 	@Override
 	public void playEffect(Game game, Player player, ArrayList<Card> cards) {
-		int i = 1;
-		
 	}
 
 	@Override

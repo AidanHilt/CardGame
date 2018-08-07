@@ -34,8 +34,7 @@ public class Player {
 	}
 	
 	public void playCard(Card card, Game game) {
-		hand.remove(card);
-		game.addCardToField(card, this);
+		boolean b = game.addCardToField(card, this);
 	}
 	
 }
