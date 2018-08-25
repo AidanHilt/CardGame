@@ -27,7 +27,6 @@ public class TestGameManager extends GameManager {
 		int cardIndex = scan.nextInt();
 		
 		return cards.get(cardIndex);
-
 	}
 
 	@Override

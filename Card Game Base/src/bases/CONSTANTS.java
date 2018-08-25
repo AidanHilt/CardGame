@@ -11,5 +11,6 @@ public class CONSTANTS {
 	public static final int MONSTER_PLAYED = 1;
 	public static final int CAST_PLAYED = 2;
 	public static final int ENERGY_DRAWN = 3;
+	public static final int MONSTER_ATTACKED = 4;
 	
 }
