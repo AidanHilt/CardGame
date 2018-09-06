@@ -6,6 +6,7 @@ import java.util.Scanner;
 import bases.Card;
 import bases.Game;
 import bases.GameManager;
+import bases.Monster;
 import bases.Player;
 
 public class TestGameManager extends GameManager {
@@ -19,7 +20,7 @@ public class TestGameManager extends GameManager {
 	@Override
 	public Card selectCard(ArrayList<Card> cards, Game game, Class cardType) {
 		for(Card c: cards) {
-			System.out.println(c.name);
+			System.out.println(c.toString());
 		}
 		
 		System.out.println("Select the index of the card you wish to use");
@@ -33,7 +34,7 @@ public class TestGameManager extends GameManager {
 	public void turnSelection(Game game) {
 		boolean wantQuit = false;
 		
-		System.out.println("Waiting for input");
+		System.out.println("Waiting for input, " + player.getName());
 		while(! wantQuit) {	
 			String s = "";
 			if(scan.hasNext()) {
@@ -46,21 +47,21 @@ public class TestGameManager extends GameManager {
 					}else {
 						System.out.println("Invalid index!");
 					}
-					System.out.println("Waiting for input");
+					System.out.println("Waiting for input, " + player.getName());
 				}
 				else if(s.equals("show")) {
 					for(Card c:player.hand) {
 						System.out.println(c.name);
 					}
-					System.out.println("Waiting for input");
+					System.out.println("Waiting for input, " + player.getName());
 				}
 				else if(s.equals("energy")) {
 					System.out.println(game.energyTotal);
-					System.out.println("Waiting for input");
+					System.out.println("Waiting for input, " + player.getName());
 				}
 				else if(s.equals("health")) {
 					System.out.println(player.getlifeTotal());
-					System.out.println("Waiting for input");
+					System.out.println("Waiting for input, " + player.getName());
 				}
 				else if(s.equals("quit")) {
 					wantQuit = true;
@@ -74,10 +75,16 @@ public class TestGameManager extends GameManager {
 					for(Card c: game.player2Side){
 						System.out.println(c.toString());
 					}
-					System.out.println("Waiting for input");
+					System.out.println("Waiting for input, " + player.getName());
 				}
-			else {
-				System.out.println("Invalid input!");
+				else if(s.equals("attack")) {
+					selectCard(game.getSide(player), game, Monster.class);
+					System.out.println("Choose target!");
+					selectCard(game.getSide(game.getOppositePlayer(player)), game, Monster.class);
+				}
+			else if (! s.equals("")){
+				System.out.println("Invalid input!, " + player.getName());
+				System.out.println(s);
 			}
 			}
 				

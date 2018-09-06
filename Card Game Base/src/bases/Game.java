@@ -74,7 +74,7 @@ public class Game {
 	}
 
 	public Player getOppositePlayer(Player player) {
-		Player returnVal= new Player();
+		Player returnVal= new Player("BLANK");
 		if(player.equals(player1)) {
 			returnVal = player2;
 		}
@@ -115,6 +115,16 @@ public class Game {
 		}
 		
 		return false;
+	}
+	
+	public ArrayList<Card> getSide(Player p){
+		if(p == player1) {
+			return player1Side;
+		}else if(p == player2) {
+			return player2Side;
+		}else {
+			return new ArrayList<Card>();
+		}
 	}
 	
 	//Methods for starting and continuing games

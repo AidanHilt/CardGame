@@ -6,8 +6,8 @@ import bases.Player;
 public class TestGame {
 	
 	static Game game = new Game();
-	static Player player1 = new Player();
-	static Player player2 = new Player();
+	static Player player1 = new Player("Player 1");
+	static Player player2 = new Player("Player 2");
 	
 	public static void main(String[] args) {
 		player1.deck.add(new TestMonster());
