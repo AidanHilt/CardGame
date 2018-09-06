@@ -20,7 +20,7 @@ public class TestMonster extends Monster {
 
 	@Override
 	public boolean playEffectValid(Game game, Player player, ArrayList<Card> cards) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
@@ -36,13 +36,30 @@ public class TestMonster extends Monster {
 
 	@Override
 	public void counterEffect(Game game, Player player, ArrayList<Card> cards) {
-		//TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public boolean counterEffectValid(Game game, Player player, ArrayList<Card> cards) {
 		return false;
+	}
+
+	@Override
+	public void undoPlayEffect(Game game, Player player, ArrayList<Card> cards) {
+		
+		
+	}
+
+	@Override
+	public void undoActivatedEffect(Game game, Player player, ArrayList<Card> cards) {
+		
+		
+	}
+
+	@Override
+	public void undoCounterEffect(Game game, Player player, ArrayList<Card> cards) {
+		
+		
 	}
 
 }

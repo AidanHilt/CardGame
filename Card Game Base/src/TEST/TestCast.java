@@ -16,38 +16,56 @@ public class TestCast extends Cast {
 
 	@Override
 	public void playEffect(Game game, Player player, ArrayList<Card> cards) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public boolean playEffectValid(Game game, Player player, ArrayList<Card> cards) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
 	public void activatedEffect(Game game, Player player, ArrayList<Card> cards) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public boolean activatedEffectValid(Game game, Player player, ArrayList<Card> cards) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
 	public void counterEffect(Game game, Player player, ArrayList<Card> cards) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public boolean counterEffectValid(Game game, Player player, ArrayList<Card> cards) {
-		// TODO Auto-generated method stub
+		
 		return false;
+	}
+
+	@Override
+	public void undoPlayEffect(Game game, Player player, ArrayList<Card> cards) {
+		
+		
+	}
+
+	@Override
+	public void undoActivatedEffect(Game game, Player player, ArrayList<Card> cards) {
+		
+		
+	}
+
+	@Override
+	public void undoCounterEffect(Game game, Player player, ArrayList<Card> cards) {
+		
+		
 	}
 	
 

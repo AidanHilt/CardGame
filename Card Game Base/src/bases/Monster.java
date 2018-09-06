@@ -27,5 +27,13 @@ public abstract class Monster extends Card {
 		name = "TEST_MONSTER";
 		energyCost = 1;
 	}
+	
+	public String toString() {
+		return name + ", ATK:" + getAttack() + " LIF:" + getLife();
+	}
+	
+	public void attackMonster(Game game, GameManager gm) {
+		((Monster) gm.selectCard(game.player2Side, game, Monster.class)).affectLifeTotal(getAttack());
+	}
 
 }

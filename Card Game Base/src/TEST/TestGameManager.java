@@ -15,9 +15,9 @@ public class TestGameManager extends GameManager {
 	}
 	
 	Scanner scan = new Scanner(System.in);
-
+	
 	@Override
-	public Card selectCard(ArrayList<Card> cards, Game game) {
+	public Card selectCard(ArrayList<Card> cards, Game game, Class cardType) {
 		for(Card c: cards) {
 			System.out.println(c.name);
 		}
@@ -35,7 +35,6 @@ public class TestGameManager extends GameManager {
 		
 		System.out.println("Waiting for input");
 		while(! wantQuit) {	
-			Scanner scan = new Scanner(System.in);
 			String s = "";
 			if(scan.hasNext()) {
 				s = scan.nextLine();
@@ -65,16 +64,15 @@ public class TestGameManager extends GameManager {
 				}
 				else if(s.equals("quit")) {
 					wantQuit = true;
-					scan.close();
 				}
 				else if(s.equals("p1side")) {
 					for(Card c:game.player1Side) {
-						System.out.println(c.name);
+						System.out.println(c.toString());
 					}
 				}
 				else if(s.equals("p2side")) {
 					for(Card c: game.player2Side){
-						System.out.println(c.name);
+						System.out.println(c.toString());
 					}
 					System.out.println("Waiting for input");
 				}
@@ -85,6 +83,13 @@ public class TestGameManager extends GameManager {
 				
 		}
 		
+	}
+
+
+	@Override
+	public boolean close() {
+		scan.close();
+		return true;
 	}
 
 }

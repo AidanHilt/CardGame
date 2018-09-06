@@ -1,8 +1,5 @@
 package TEST;
 
-import java.util.Scanner;
-
-import bases.Card;
 import bases.Game;
 import bases.Player;
 
@@ -29,10 +26,9 @@ public class TestGame {
 		game.player2 = player2;
 		
 		game.player1GameManager = new TestGameManager(player1);
+		game.player2GameManager = new TestGameManager(player2);
 		
 		game.startGame();
-		
-		game.player1GameManager.turnSelection(game);
 	}
 
 }

@@ -130,7 +130,11 @@ public class Game {
 	private void runGame() {
 		while(! player1.isDefeated() && ! player2.isDefeated()) {
 			player1GameManager.turnSelection(this);
+			turnCount ++;
+			energyTotal += CONSTANTS.ENERGY_GAIN_PER_TURN[turnCount];
 			player2GameManager.turnSelection(this);
+			turnCount ++;
+			energyTotal += CONSTANTS.ENERGY_GAIN_PER_TURN[turnCount];
 		}
 		System.out.println("Out of loop!");
 	}
