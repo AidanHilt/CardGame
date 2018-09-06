@@ -100,7 +100,7 @@ public class Game {
 		}
 		
 		if(player1Options.size() > 0) {
-			Card c = player1GameManager.selectCard(player1Options, this);
+			Card c = player1GameManager.selectCard(player1Options, this, Card.class);
 			if(c.activatedEffectValid(this, player1, player1Side)) {
 				c.activatedEffect(this, player1, player1Side);
 			}
@@ -123,7 +123,21 @@ public class Game {
 		player2.drawHand();
 		
 		energyTotal = CONSTANTS.ENERGY_GAIN_PER_TURN[0];
+		
+		runGame();
+	}
+	
+	private void runGame() {
+		while(! player1.isDefeated() && ! player2.isDefeated()) {
+			player1GameManager.turnSelection(this);
+			player2GameManager.turnSelection(this);
+		}
+		System.out.println("Out of loop!");
 	}
 
+	private void close() {
+		player1GameManager.close();
+		player2GameManager.close();
+	}
 
 }
