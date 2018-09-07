@@ -25,8 +25,8 @@ public class TestGame {
 		game.player1 = player1;
 		game.player2 = player2;
 		
-		game.player1GameManager = new TestGameManager(player1);
-		game.player2GameManager = new TestGameManager(player2);
+		player1.setGameManager(new TestGameManager(player1));
+		player2.setGameManager(new TestGameManager(player2));
 		
 		game.startGame();
 	}

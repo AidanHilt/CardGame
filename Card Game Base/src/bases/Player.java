@@ -3,6 +3,16 @@ package bases;
 import java.util.ArrayList;
 
 public class Player {
+	private GameManager gameManager;
+	
+	public void setGameManager(GameManager gm) {
+		gameManager = gm;
+	}
+	
+	public GameManager getGameManager() {
+		return gameManager;
+	}
+	
 	public Player(String name) {
 		this.name = name;
 	}

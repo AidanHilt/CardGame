@@ -23,7 +23,7 @@ public class TestGameManager extends GameManager {
 			System.out.println(c.toString());
 		}
 		
-		System.out.println("Select the index of the card you wish to use");
+		System.out.println("Select the index of the card you wish to use, " + player.getName());
 		
 		int cardIndex = scan.nextInt();
 		

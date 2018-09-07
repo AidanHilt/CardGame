@@ -6,14 +6,17 @@ public class Game {
 	public Player player1;
 	public Player player2;
 	
+	private Player playerUp;
+	
+	public Player getPlayerUp() {
+		return playerUp;
+	}
+	
 	public int energyTotal = 0;
 	public int turnCount = 0;
 	
 	public ArrayList<Card> player1Side = new ArrayList<Card>();
 	public ArrayList<Card> player2Side = new ArrayList<Card>();
-	
-	public GameManager player1GameManager;
-	public GameManager player2GameManager;
 	
 	public ArrayList<int[]> eventLog = new ArrayList<int[]>();
 	
@@ -93,14 +96,16 @@ public class Game {
 		
 		for(int i : codes) {
 			for(Card c : player1.hand) {
-				if(intInArray(i, c.getRespondCodes())) {
+				//TODO Keep an eye on this. Might need to modify this method to take both sides as an argument, as it could become dependent on
+				// cards on either side of the field.
+				if(intInArray(i, c.getRespondCodes()) && c.activatedEffectValid(this, player1, player1Side)) {
 					player1Options.add(c);
 				}
 			}
 		}
 		
 		if(player1Options.size() > 0) {
-			Card c = player1GameManager.selectCard(player1Options, this, Card.class);
+			Card c = player1.getGameManager().selectCard(player1Options, this, Card.class);
 			if(c.activatedEffectValid(this, player1, player1Side)) {
 				c.activatedEffect(this, player1, player1Side);
 			}
@@ -138,20 +143,25 @@ public class Game {
 	}
 	
 	private void runGame() {
+		playerUp = player1;
 		while(! player1.isDefeated() && ! player2.isDefeated()) {
-			player1GameManager.turnSelection(this);
+			playerUp.getGameManager().turnSelection(this);
 			turnCount ++;
 			energyTotal += CONSTANTS.ENERGY_GAIN_PER_TURN[turnCount];
-			player2GameManager.turnSelection(this);
+			playerUp = getOppositePlayer(playerUp);
+			
+			playerUp.getGameManager().turnSelection(this);
 			turnCount ++;
 			energyTotal += CONSTANTS.ENERGY_GAIN_PER_TURN[turnCount];
+			playerUp = getOppositePlayer(playerUp);
 		}
 		System.out.println("Out of loop!");
+		close();
 	}
 
 	private void close() {
-		player1GameManager.close();
-		player2GameManager.close();
+		player1.getGameManager().close();
+		player2.getGameManager().close();
 	}
 
 }

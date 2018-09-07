@@ -20,7 +20,6 @@ public class TestMonster extends Monster {
 
 	@Override
 	public boolean playEffectValid(Game game, Player player, ArrayList<Card> cards) {
-		
 		return false;
 	}
 
@@ -31,7 +30,12 @@ public class TestMonster extends Monster {
 
 	@Override
 	public boolean activatedEffectValid(Game game, Player player, ArrayList<Card> cards) {
-		return true;
+		if(game.getPlayerUp() == player) {
+			System.out.println(game.getPlayerUp() == player);
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	@Override
