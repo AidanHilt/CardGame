@@ -54,7 +54,7 @@ public class Player {
 	}
 	
 	public void playCard(Card card, Game game) {
-		boolean b = game.addCardToField(card, this);
+		game.addCardToField(card, this);
 	}
 
 }

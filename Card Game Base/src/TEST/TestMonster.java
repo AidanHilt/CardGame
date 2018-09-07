@@ -10,8 +10,9 @@ import bases.CONSTANTS;
 
 public class TestMonster extends Monster {
 	public TestMonster() {
-		int[] codes = {CONSTANTS.MONSTER_PLAYED};
+		int[] codes = {CONSTANTS.NULL_EVENT};
 		setRespondCodes(codes);
+		attack = 1;
 	}
 	
 	@Override
@@ -31,7 +32,6 @@ public class TestMonster extends Monster {
 	@Override
 	public boolean activatedEffectValid(Game game, Player player, ArrayList<Card> cards) {
 		if(game.getPlayerUp() == player) {
-			System.out.println(game.getPlayerUp() == player);
 			return true;
 		}else {
 			return false;

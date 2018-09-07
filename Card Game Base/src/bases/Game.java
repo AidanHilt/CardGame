@@ -58,6 +58,7 @@ public class Game {
 			boolean b = affectEnergyTotal(card.getEnergyCost());
 			if(b) {
 				player2Side.add(card);
+				player2.hand.remove(card);
 				int[] codes = {CONSTANTS.NULL_EVENT};
 				if(card instanceof Monster) {
 					int[] val = {CONSTANTS.CARD_PLAYED, CONSTANTS.MONSTER_PLAYED};
@@ -102,12 +103,25 @@ public class Game {
 					player1Options.add(c);
 				}
 			}
+			
+			for(Card c: player2.hand) {
+				if(intInArray(i, c.getRespondCodes()) && c.activatedEffectValid(this, player2, player2Side)) {
+					player2Options.add(c);
+				}
+			}
 		}
 		
 		if(player1Options.size() > 0) {
 			Card c = player1.getGameManager().selectCard(player1Options, this, Card.class);
 			if(c.activatedEffectValid(this, player1, player1Side)) {
 				c.activatedEffect(this, player1, player1Side);
+			}
+		}
+		
+		if(player2Options.size() > 0) {
+			Card c = player2.getGameManager().selectCard(player2Options, this, Card.class);
+			if(c.activatedEffectValid(this, player2, player2Side)) {
+				c.activatedEffect(this, player2, player2Side);
 			}
 		}
 	}

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public abstract class GameManager {
 	protected Player player;
 
-	public abstract Card selectCard(ArrayList<Card> cards, Game game, Class cardType);
+	public abstract Card selectCard(ArrayList<Card> cards, Game game, Class<?> cardType);
 	
 	public abstract void turnSelection(Game game);
 	

@@ -18,7 +18,8 @@ public class TestGameManager extends GameManager {
 	Scanner scan = new Scanner(System.in);
 	
 	@Override
-	public Card selectCard(ArrayList<Card> cards, Game game, Class cardType) {
+	//TODO Add the option to select no cards
+	public Card selectCard(ArrayList<Card> cards, Game game, Class<?> cardType) {
 		for(Card c: cards) {
 			System.out.println(c.toString());
 		}
@@ -77,10 +78,22 @@ public class TestGameManager extends GameManager {
 					}
 					System.out.println("Waiting for input, " + player.getName());
 				}
+				else if(s.equals("field")) {
+					System.out.println("Player 1 side");
+					for(Card c:game.player1Side) {
+						System.out.println(c.toString());
+					}
+					System.out.println("Player 2 side");
+					for(Card c: game.player2Side){
+						System.out.println(c.toString());
+					}
+				}
 				else if(s.equals("attack")) {
-					selectCard(game.getSide(player), game, Monster.class);
+					Monster attackMonster = (Monster) selectCard(game.getSide(player), game, Monster.class);
 					System.out.println("Choose target!");
-					selectCard(game.getSide(game.getOppositePlayer(player)), game, Monster.class);
+					Monster defenseMonster = (Monster) selectCard(game.getSide(game.getOppositePlayer(player)), game, Monster.class);
+					
+					attackMonster.attackMonster(game, defenseMonster);
 				}
 			else if (! s.equals("")){
 				System.out.println("Invalid input!, " + player.getName());

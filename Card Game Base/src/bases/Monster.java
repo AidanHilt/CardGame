@@ -3,7 +3,7 @@ package bases;
 import java.util.ArrayList;
 
 public abstract class Monster extends Card {
-	private int attack;
+	protected int attack;
 	
 	public int getAttack() {
 		//TODO Add attack bonuses and penalties
@@ -15,12 +15,19 @@ public abstract class Monster extends Card {
 	private ArrayList<Integer> lifeChanges = new ArrayList<Integer>();
 	
 	public int getLife() {
-		//TODO Add healing and damage
-		return life;
+		int returnVal = life;
+		
+		for(Integer i : lifeChanges) {
+			System.out.println(i.intValue());
+			returnVal -= i.intValue();
+		}
+		
+		return returnVal;
 	}
 	
 	public void affectLifeTotal(int value) {
 		lifeChanges.add(new Integer(value));
+		System.out.println("Affected total!");
 	}
 	
 	public Monster(){
@@ -32,8 +39,8 @@ public abstract class Monster extends Card {
 		return name + ", ATK:" + getAttack() + " LIF:" + getLife();
 	}
 	
-	public void attackMonster(Game game, GameManager gm) {
-		((Monster) gm.selectCard(game.player2Side, game, Monster.class)).affectLifeTotal(getAttack());
+	public void attackMonster(Game game, Monster m) {
+		m.affectLifeTotal(getAttack());
 	}
 
 }
