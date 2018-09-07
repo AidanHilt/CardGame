@@ -87,6 +87,8 @@ public class TestGameManager extends GameManager {
 					for(Card c: game.player2Side){
 						System.out.println(c.toString());
 					}
+					
+					System.out.println("Waiting for input, " + player.getName());
 				}
 				else if(s.equals("attack")) {
 					Monster attackMonster = (Monster) selectCard(game.getSide(player), game, Monster.class);
@@ -94,6 +96,8 @@ public class TestGameManager extends GameManager {
 					Monster defenseMonster = (Monster) selectCard(game.getSide(game.getOppositePlayer(player)), game, Monster.class);
 					
 					attackMonster.attackMonster(game, defenseMonster);
+					
+					System.out.println("Waiting for input, " + player.getName());
 				}
 			else if (! s.equals("")){
 				System.out.println("Invalid input!, " + player.getName());
@@ -104,7 +108,6 @@ public class TestGameManager extends GameManager {
 		}
 		
 	}
-
 
 	@Override
 	public boolean close() {

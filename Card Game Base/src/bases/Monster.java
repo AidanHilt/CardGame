@@ -5,9 +5,24 @@ import java.util.ArrayList;
 public abstract class Monster extends Card {
 	protected int attack;
 	
+	private ArrayList<Integer> attackBonuses = new ArrayList<Integer>();
+	
+	public void addAttackBonus(int bonus) {
+		attackBonuses.add(new Integer(bonus));
+	}
+	
+	public void removeAttackBonus(int bonus) {
+		attackBonuses.remove(new Integer(bonus));
+	}
+	
 	public int getAttack() {
-		//TODO Add attack bonuses and penalties
-		return attack;
+		int returnVal = attack;
+		
+		for(Integer i : attackBonuses) {
+			returnVal += i.intValue();
+		}
+		
+		return returnVal;
 	}
 	
 	private int life;
@@ -18,7 +33,6 @@ public abstract class Monster extends Card {
 		int returnVal = life;
 		
 		for(Integer i : lifeChanges) {
-			System.out.println(i.intValue());
 			returnVal -= i.intValue();
 		}
 		
@@ -27,7 +41,6 @@ public abstract class Monster extends Card {
 	
 	public void affectLifeTotal(int value) {
 		lifeChanges.add(new Integer(value));
-		System.out.println("Affected total!");
 	}
 	
 	public Monster(){
