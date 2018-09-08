@@ -52,6 +52,10 @@ public class Game {
 				
 				addEventToQueue(codes);
 				returnVal = true;
+				
+				if(card.playEffectValid(this, player, getSide(player1))) {
+					card.playEffect(this, player, getSide(player1));
+				}
 			}
 		}
 		else if(player == player2) {
@@ -127,14 +131,16 @@ public class Game {
 	}
 	
 	public boolean intInArray(int i, int[] array) {
-		for(int p:array) {
-			if(i == p) {
-				return true;
+		if(array.length > 0) {
+			for(int p:array) {
+				if(i == p) {
+					return true;
+				}
 			}
-		}
-		
+		}	
 		return false;
 	}
+		
 	
 	public ArrayList<Card> getSide(Player p){
 		if(p == player1) {
