@@ -81,6 +81,17 @@ public class Game {
 		return returnVal;
 	}
 
+	public boolean intInArray(int i, int[] array) {
+		if(array.length > 0) {
+			for(int p:array) {
+				if(i == p) {
+					return true;
+				}
+			}
+		}	
+		return false;
+	}
+	
 	public Player getOppositePlayer(Player player) {
 		Player returnVal= new Player("BLANK");
 		if(player.equals(player1)) {
@@ -116,32 +127,22 @@ public class Game {
 		}
 		
 		if(player1Options.size() > 0) {
-			Card c = player1.getGameManager().selectCard(player1Options, this, Card.class);
+			int i = player1.getGameManager().selectCard(player1Options, this, Card.class);
+			Card c = getSide(player1).get(i);
 			if(c.activatedEffectValid(this, player1, player1Side)) {
 				c.activatedEffect(this, player1, player1Side);
 			}
 		}
 		
 		if(player2Options.size() > 0) {
-			Card c = player2.getGameManager().selectCard(player2Options, this, Card.class);
+			int i = player2.getGameManager().selectCard(player2Options, this, Card.class);
+			Card c = getSide(player2).get(i);
 			if(c.activatedEffectValid(this, player2, player2Side)) {
 				c.activatedEffect(this, player2, player2Side);
 			}
 		}
 	}
-	
-	public boolean intInArray(int i, int[] array) {
-		if(array.length > 0) {
-			for(int p:array) {
-				if(i == p) {
-					return true;
-				}
-			}
-		}	
-		return false;
-	}
-		
-	
+
 	public ArrayList<Card> getSide(Player p){
 		if(p == player1) {
 			return player1Side;

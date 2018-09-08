@@ -3,6 +3,7 @@ package TEST;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import bases.BlankCard;
 import bases.Card;
 import bases.Game;
 import bases.GameManager;
@@ -19,16 +20,16 @@ public class TestGameManager extends GameManager {
 	
 	@Override
 	//TODO Add the option to select no cards
-	public Card selectCard(ArrayList<Card> cards, Game game, Class<?> cardType) {
+	public int selectCard(ArrayList<Card> cards, Game game, Class<?> cardType) {
 		for(Card c: cards) {
 			System.out.println(c.toString());
 		}
 		
-		System.out.println("Select the index of the card you wish to use, " + player.getName());
+		System.out.println("Select the index of the card you wish to use, or choose to use none" + player.getName());
 		
 		int cardIndex = scan.nextInt();
 		
-		return cards.get(cardIndex);
+		return cardIndex;
 	}
 
 	@Override
@@ -41,9 +42,10 @@ public class TestGameManager extends GameManager {
 			if(scan.hasNext()) {
 				s = scan.nextLine();
 				if(s.equals("play")) {
+					//TODO Make this use the selectCard() method
 					System.out.println("Enter index of desired card");
 					int index = scan.nextInt();
-					if(index < player.hand.size()) {
+					if(index < player.hand.size() && index != -1) {
 						player.playCard(player.hand.get(index), game);
 					}else {
 						System.out.println("Invalid index!");
@@ -91,11 +93,18 @@ public class TestGameManager extends GameManager {
 					System.out.println("Waiting for input, " + player.getName());
 				}
 				else if(s.equals("attack")) {
-					Monster attackMonster = (Monster) selectCard(game.getSide(player), game, Monster.class);
-					System.out.println("Choose target!");
-					Monster defenseMonster = (Monster) selectCard(game.getSide(game.getOppositePlayer(player)), game, Monster.class);
-					
-					attackMonster.attackMonster(game, defenseMonster);
+					int atkIndex = selectCard(game.getSide(player), game, Monster.class);
+					if(atkIndex != -1) {
+						System.out.println("Choose target!");
+						int defIndex = selectCard(game.getSide(game.getOppositePlayer(player)), game, Monster.class);
+						
+						if(defIndex != -1) {
+							Monster attackMonster = (Monster) game.getSide(player).get(atkIndex);
+							Monster defenseMonster = (Monster) game.getSide(player).get(defIndex);
+							attackMonster.attackMonster(game, defenseMonster);
+						}
+						
+					}
 					
 					System.out.println("Waiting for input, " + player.getName());
 				}
