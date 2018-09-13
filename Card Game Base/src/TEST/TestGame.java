@@ -13,13 +13,13 @@ public class TestGame {
 		player1.deck.add(new TestMonster());
 		player1.deck.add(new TestMonster());
 		player1.deck.add(new TestMonster());
-		player1.deck.add(new TestCast());
+		player1.deck.add(new AttackBonusCast());
 		player1.deck.add(new TestCast());
 		
 		player2.deck.add(new TestMonster());
 		player2.deck.add(new TestMonster());
 		player2.deck.add(new TestMonster());
-		player2.deck.add(new TestCast());
+		player2.deck.add(new AttackBonusCast());
 		player2.deck.add(new TestCast());
 		
 		game.player1 = player1;

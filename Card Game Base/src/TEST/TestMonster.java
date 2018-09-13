@@ -13,6 +13,7 @@ public class TestMonster extends Monster {
 		int[] codes = {CONSTANTS.NULL_EVENT};
 		setRespondCodes(codes);
 		attack = 1;
+		life = 3;
 	}
 	
 	@Override

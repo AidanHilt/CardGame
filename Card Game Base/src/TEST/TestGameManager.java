@@ -3,7 +3,6 @@ package TEST;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import bases.BlankCard;
 import bases.Card;
 import bases.Game;
 import bases.GameManager;
@@ -19,13 +18,12 @@ public class TestGameManager extends GameManager {
 	Scanner scan = new Scanner(System.in);
 	
 	@Override
-	//TODO Add the option to select no cards
 	public int selectCard(ArrayList<Card> cards, Game game, Class<?> cardType) {
 		for(Card c: cards) {
 			System.out.println(c.toString());
 		}
 		
-		System.out.println("Select the index of the card you wish to use, or choose to use none" + player.getName());
+		System.out.println("Select the index of the card you wish to use, or choose to use none, " + player.getName());
 		
 		int cardIndex = scan.nextInt();
 		
@@ -43,11 +41,10 @@ public class TestGameManager extends GameManager {
 				s = scan.nextLine();
 				if(s.equals("play")) {
 					//TODO Make this use the selectCard() method
-					System.out.println("Enter index of desired card");
-					int index = scan.nextInt();
+					int index = player.getGameManager().selectCard(player.hand, game, Card.class);
 					if(index < player.hand.size() && index != -1) {
 						player.playCard(player.hand.get(index), game);
-					}else {
+					}else if(index != -1){
 						System.out.println("Invalid index!");
 					}
 					System.out.println("Waiting for input, " + player.getName());

@@ -25,7 +25,7 @@ public abstract class Monster extends Card {
 		return returnVal;
 	}
 	
-	private int life;
+	protected int life;
 	
 	private ArrayList<Integer> lifeChanges = new ArrayList<Integer>();
 	

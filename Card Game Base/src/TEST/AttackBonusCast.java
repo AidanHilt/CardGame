@@ -14,12 +14,13 @@ public class AttackBonusCast extends Cast {
 		int[] codes = {CONSTANTS.NULL_EVENT};
 		setRespondCodes(codes);
 		name = "Attack Bonus Cast";
-		energyCost = 2;
+		energyCost = 1;
 	}
 
 	@Override
+	//TODO Split the one-line abomination into two, to make it clearer what is happening here
 	public void playEffect(Game game, Player player, ArrayList<Card> cards) {
-		Monster selectedCard = (Monster) player.getGameManager().selectCard(game.getSide(player), game, Monster.class);
+		Monster selectedCard = (Monster) game.getSide(player).get(player.getGameManager().selectCard(game.getSide(player), game, Monster.class));
 		selectedCard.addAttackBonus(3);
 
 	}

@@ -153,6 +153,10 @@ public class Game {
 		}
 	}
 	
+	//TODO Keep an eye on this. Might need to add a player argument.
+	public void removeCard(Card c) {
+		
+	}
 	//Methods for starting and continuing games
 	public void startGame() {
 		player1.drawHand();
