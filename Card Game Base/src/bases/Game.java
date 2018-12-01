@@ -155,7 +155,8 @@ public class Game {
 	
 	//TODO Keep an eye on this. Might need to add a player argument.
 	public void removeCard(Card c) {
-		
+		if(player1Side.contains(c)) player1Side.remove(c);
+		if(player2Side.contains(c)) player2Side.remove(c);
 	}
 	//Methods for starting and continuing games
 	public void startGame() {

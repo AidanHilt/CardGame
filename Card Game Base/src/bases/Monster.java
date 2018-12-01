@@ -1,6 +1,7 @@
 package bases;
 
 import java.util.ArrayList;
+import bases.CONSTANTS;
 
 public abstract class Monster extends Card {
 	protected int attack;
@@ -52,8 +53,26 @@ public abstract class Monster extends Card {
 		return name + ", ATK:" + getAttack() + " LIF:" + getLife();
 	}
 	
+	//Note: This can be overriden if the monster is meant to have a different condition for staying alive
+	//TODO Keep an eye on this, and add new arguments as needed
+	public boolean canLive() {
+		if(getLife() > 0) return true;
+		return false;
+	}
+	
 	public void attackMonster(Game game, Monster m) {
 		m.affectLifeTotal(getAttack());
+		
+		if(! m.canLive()) { 
+			game.removeCard(m); 
+			int[] codes = {CONSTANTS.MONSTER_KILLED_IN_BATTLE, CONSTANTS.MONSTER_REMOVED};
+			game.addEventToQueue(codes);
+		}
+		if(! this.canLive()) { 
+			game.removeCard(this);
+			int[] codes = {CONSTANTS.MONSTER_KILLED_IN_BATTLE, CONSTANTS.MONSTER_REMOVED};
+			game.addEventToQueue(codes);
+		}
 	}
 
 }

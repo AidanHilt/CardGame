@@ -97,7 +97,7 @@ public class TestGameManager extends GameManager {
 						
 						if(defIndex != -1) {
 							Monster attackMonster = (Monster) game.getSide(player).get(atkIndex);
-							Monster defenseMonster = (Monster) game.getSide(player).get(defIndex);
+							Monster defenseMonster = (Monster) game.getSide(game.getOppositePlayer(player)).get(defIndex);
 							attackMonster.attackMonster(game, defenseMonster);
 						}
 						
@@ -105,8 +105,12 @@ public class TestGameManager extends GameManager {
 					
 					System.out.println("Waiting for input, " + player.getName());
 				}
+				else if(s.equals("help")) {
+					//TODO Add help item to test game manager
+					System.out.println("Write all commands in all lowercase letters");
+				}
 			else if (! s.equals("")){
-				System.out.println("Invalid input!, " + player.getName());
+				System.out.println("Invalid input, " + player.getName());
 				System.out.println(s);
 			}
 			}

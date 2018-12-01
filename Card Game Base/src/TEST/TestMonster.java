@@ -12,7 +12,7 @@ public class TestMonster extends Monster {
 	public TestMonster() {
 		int[] codes = {CONSTANTS.NULL_EVENT};
 		setRespondCodes(codes);
-		attack = 1;
+		attack = 4;
 		life = 3;
 	}
 	
